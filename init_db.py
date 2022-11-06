@@ -12,9 +12,12 @@ conn_cursor.execute("DROP TABLE IF EXISTS vehicle")
 conn_cursor.execute("DROP TABLE IF EXISTS visitor_entry")
 conn_cursor.execute("DROP TABLE IF EXISTS flat")
 conn_cursor.execute("DROP TABLE IF EXISTS occupies")
+conn_cursor.execute("DROP TABLE IF EXISTS owner_history")
+conn_cursor.execute("DROP TABLE IF EXISTS tenant_history")
 conn_cursor.execute("DROP TABLE IF EXISTS maintainance")
 
-society_table = """CREATE TABLE society (
+society_table = """
+CREATE TABLE society (
     type_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(256),
     address1 VARCHAR(256),
@@ -26,52 +29,61 @@ society_table = """CREATE TABLE society (
     email   VARCHAR(64)
 );
 """
+#    CONSTRAINT society_pk PRIMARY KEY (type_ID)
 
-person_type_table = """CREATE TABLE person_type (
+
+person_type_table = """
+CREATE TABLE person_type (
     type_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     type VARCHAR(16)
 );
 """
 
-person_table = """CREATE TABLE person (
+person_table = """
+CREATE TABLE person (
     person_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(256),
     phone_number CHAR(10),
     person_type INTEGER,
-    FOREIGN KEY (person_type) REFERENCES person_type(type_ID)
+    CONSTRAINT `person_fk1` FOREIGN KEY (person_type) REFERENCES person_type(type_ID)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 """
 
-vehicle_type_table = """CREATE TABLE vehicle_type (
+vehicle_type_table = """
+CREATE TABLE vehicle_type (
     type_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     type VARCHAR(16)
 );
 """
 
-vehicle_table = """CREATE TABLE vehicle (
+vehicle_table = """
+CREATE TABLE vehicle (
     vehicle_ID VARCHAR(16) PRIMARY KEY NOT NULL,
     make VARCHAR(32),
     model VARCHAR(32),
     owner_ID INTEGER,
     type INTEGER,
-    FOREIGN KEY (owner_ID) REFERENCES person(person_ID),
-    FOREIGN KEY (type) REFERENCES vehicle_type(type_ID)
+    CONSTRAINT `vehicle_fk1` FOREIGN KEY (owner_ID) REFERENCES person(person_ID),
+    CONSTRAINT `vehicle_fk2` FOREIGN KEY (type) REFERENCES vehicle_type(type_ID)
 );
 """
 
-flat_table = """CREATE TABLE flat (
+flat_table = """
+CREATE TABLE flat (
     flat_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     flat_no VARCHAR(8),
     bldg_no VARCHAR(8),
     floor_no INTEGER,
     area DOUBLE,
-    owner_ID INTEGER,
-    FOREIGN KEY (owner_ID) REFERENCES person(person_ID)
+    occupant_ID INTEGER,
+    CONSTRAINT `flat_fk1` FOREIGN KEY (occupant_ID) REFERENCES person(person_ID)
     CONSTRAINT  `flat_uniq_id` UNIQUE (`flat_no`,`bldg_no`,'floor_no')
 );
 """
 
-visitor_entry_table = """CREATE TABLE visitor_entry (
+visitor_entry_table = """
+CREATE TABLE visitor_entry (
     entry_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     visitor_ID INTEGER,
     flat_ID INTEGER,
@@ -79,20 +91,46 @@ visitor_entry_table = """CREATE TABLE visitor_entry (
     exit_time VARCHAR(24),
     vehicle_number VARCHAR(16),
     no_of_people INTEGER,
-    FOREIGN KEY (visitor_ID) REFERENCES person(person_ID),
-    FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID)
+    CONSTRAINT `visitor_entry_fk1` FOREIGN KEY (visitor_ID) REFERENCES person(person_ID),
+    CONSTRAINT `visitor_entry_fk2` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID)
 );
 """
 
-occupant_table = """CREATE TABLE occupies (
-    occupant_ID INTEGER PRIMARY KEY NOT NULL,
-    flat_ID INTEGER,
-    FOREIGN KEY (occupant_ID) REFERENCES person(person_ID),
-    FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID)
+# occupant_table = """
+# CREATE TABLE occupies (
+#     occupant_ID INTEGER PRIMARY KEY NOT NULL,
+#     flat_ID INTEGER,
+#     CONSTRAINT `occupant_fk1` FOREIGN KEY (occupant_ID) REFERENCES person(person_ID),
+#     CONSTRAINT `occupant_fk2` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID)
+# );
+# """
+
+owner_history_table = """
+CREATE TABLE owner_history (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    flat_ID INTEGER NOT NULL,
+    owner_ID INTEGER NOT NULL,
+    CONSTRAINT `owner_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
+    CONSTRAINT `owner_history_fk2` FOREIGN KEY (owner_ID) REFERENCES person(person_ID)
 );
 """
 
-maintainance = """CREATE TABLE maintainance (
+
+tenant_history_table = """
+CREATE TABLE owner_history (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    flat_ID INTEGER NOT NULL,
+    tenant_ID INTEGER NOT NULL,
+    from_date VARCHAR(24),
+    end_date VARCHAR(24),
+    CONSTRAINT `tenant_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
+    CONSTRAINT `tenant_history_fk2` FOREIGN KEY (tenant_ID) REFERENCES person(person_ID)
+);
+"""
+
+
+maintainance = """
+CREATE TABLE maintainance (
     maintainance_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     period VARCHAR(16),
     payment_date VARCHAR(10),
@@ -112,7 +150,7 @@ conn_cursor.execute(vehicle_type_table)
 conn_cursor.execute(vehicle_table)
 conn_cursor.execute(visitor_entry_table)
 conn_cursor.execute(flat_table)
-conn_cursor.execute(occupant_table)
+# conn_cursor.execute(occupant_table)
 conn_cursor.execute(maintainance)
 
 conn.commit()
