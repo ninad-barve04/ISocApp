@@ -6,15 +6,19 @@ conn_cursor = conn.cursor()
 
 conn_cursor.execute("DROP TABLE IF EXISTS society")
 conn_cursor.execute("DROP TABLE IF EXISTS person_type")
+conn_cursor.execute("DROP TABLE IF EXISTS occupant_type")
 conn_cursor.execute("DROP TABLE IF EXISTS person")
 conn_cursor.execute("DROP TABLE IF EXISTS vehicle_type")
 conn_cursor.execute("DROP TABLE IF EXISTS vehicle")
 conn_cursor.execute("DROP TABLE IF EXISTS visitor_entry")
 conn_cursor.execute("DROP TABLE IF EXISTS flat")
 conn_cursor.execute("DROP TABLE IF EXISTS occupies")
-conn_cursor.execute("DROP TABLE IF EXISTS owner_history")
-conn_cursor.execute("DROP TABLE IF EXISTS tenant_history")
+conn_cursor.execute("DROP TABLE IF EXISTS flat_owner_history_table")
+conn_cursor.execute("DROP TABLE IF EXISTS flat_owner_file_record_table")
+conn_cursor.execute("DROP TABLE IF EXISTS flat_occupant_history_table")
+conn_cursor.execute("DROP TABLE IF EXISTS occupant_type")
 conn_cursor.execute("DROP TABLE IF EXISTS maintainance")
+
 
 society_table = """
 CREATE TABLE society (
@@ -61,8 +65,8 @@ CREATE TABLE vehicle (
     model VARCHAR(32),
     owner_ID INTEGER,
     type INTEGER,
-    CONSTRAINT `vehicle_fk1` FOREIGN KEY (owner_ID) REFERENCES person(person_ID),
-    CONSTRAINT `vehicle_fk2` FOREIGN KEY (type) REFERENCES vehicle_type(type_ID)
+    CONSTRAINT vehicle_fk1 FOREIGN KEY (owner_ID) REFERENCES person(person_ID),
+    CONSTRAINT vehicle_fk2 FOREIGN KEY (type) REFERENCES vehicle_type(type_ID)
 );
 """
 
@@ -74,8 +78,8 @@ CREATE TABLE flat (
     floor_no INTEGER,
     area DOUBLE,
     occupant_ID INTEGER,
-    CONSTRAINT `flat_fk1` FOREIGN KEY (occupant_ID) REFERENCES person(person_ID)
-    CONSTRAINT  `flat_uniq_id` UNIQUE (`flat_no`,`bldg_no`,'floor_no')
+    CONSTRAINT flat_fk1 FOREIGN KEY (occupant_ID) REFERENCES person(person_ID),
+    CONSTRAINT flat_uniq_id UNIQUE (flat_no,bldg_no,floor_no)
 );
 """
 
@@ -111,8 +115,19 @@ CREATE TABLE flat_owner_history_table (
     person_ID INTEGER NOT NULL,
     purchase_date VARCHAR(24),
     sale_date VARCHAR(24),
-    CONSTRAINT `owner_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
-    CONSTRAINT `owner_history_fk2` FOREIGN KEY (person_ID) REFERENCES person(person_ID)
+    CONSTRAINT owner_history_fk1 FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
+    CONSTRAINT owner_history_fk2 FOREIGN KEY (person_ID) REFERENCES person(person_ID),
+    CONSTRAINT owner_history_unique_id UNIQUE (flat_ID, person_ID, purchase_date, sale_date)
+);
+"""
+
+
+owner_file_record_table = """
+CREATE TABLE flat_owner_file_record_table (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    history_ID INTEGER NOT NULL,
+    filepath VARCHAR(128),
+    CONSTRAINT owner_file_fk1 FOREIGN KEY (history_ID) REFERENCES flat_owner_history_table(ID)
 );
 """
 
@@ -125,8 +140,10 @@ CREATE TABLE flat_occupant_history_table (
     type INTEGER NOT NULL,
     from_date VARCHAR(24),
     end_date VARCHAR(24),
-    CONSTRAINT `tenant_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
-    CONSTRAINT `tenant_history_fk2` FOREIGN KEY (person_ID) REFERENCES person(person_ID)
+    CONSTRAINT tenant_history_fk1 FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
+    CONSTRAINT tenant_history_fk2 FOREIGN KEY (person_ID) REFERENCES person(person_ID),
+    CONSTRAINT tenant_history_fk3 FOREIGN KEY (type) REFERENCES occupant_type(type_ID),
+    CONSTRAINT occupant_history_unique_id UNIQUE (flat_ID, person_ID, type, from_date, end_date)
 );
 """
 
@@ -156,6 +173,7 @@ conn_cursor.execute(owner_history_table)
 conn_cursor.execute(occupant_history_table)
 # conn_cursor.execute(occupant_table)
 conn_cursor.execute(maintainance)
+conn_cursor.execute(owner_file_record_table)
 
 conn.commit()
 conn.close()

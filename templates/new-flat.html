@@ -39,10 +39,13 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="static/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="static/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<!--end::Global Stylesheets Bundle-->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
 </head>
 <!--end::Head-->
@@ -164,7 +167,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Table Widget 1-->
 										{% if error|length > 0 %}
 										<div class="alert alert-danger" role="alert">
-											Error creating record :  {{ error }}
+											Error creating record : {{ error }}
 										</div>
 										{% endif %}
 										<div class="card">
@@ -179,8 +182,8 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Body-->
 											<div class="card-body py-0 fs-3">
 
-												<form class="form" id="kt_modal_add_event_form" 
-												action="/newflat" method="POST">
+												<form class="form" id="kt_modal_add_event_form"
+													enctype="multipart/form-data" action="/newflat" method="POST">
 													<!--begin::Modal header-->
 													<div class="modal-header">
 
@@ -189,84 +192,117 @@ License: For each use you must have a valid license purchased only from above li
 													<!--begin::Modal body-->
 													<div class="modal-body py-10 px-lg-17">
 														<div class="row">
-														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Building Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="visitorphone form-control form-control-solid"
-																placeholder="" name="building_no"  />
-															<!--end::Input-->
-														</div>
-
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Flat Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="flat_no"   />
-															<!--end::Input-->
-														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Floor</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="floor"  />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Area ( as per sale deed)</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="area"   />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Owner Name</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input id="ownername" type="text"  class="owernername form-control form-control-solid"
-															data-provide="typeahead" placeholder="" name="owner_name"  />
-															<input hidden id="ownerid" type="text"  class="form-control form-control-solid"
-																placeholder="" name="owner_id" />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Owner Phone Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input id="ownerphone" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_phone"   />
-
-															<input hidden id="ownertype" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_type"  value="OWNER"/>
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<div class="form-check form-switch form-check-custom form-check-solid">
-																 
-																<label class="form-check-label m-4" for="flexSwitchChecked">
-																	Owner is occupant
-																</label>
-																<input class="form-check-input" type="checkbox" name="owneroccupant" id="flexSwitchChecked"  checked  />
-																 
+															<!--begin::Input group-->
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Building Number</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="visitorphone form-control form-control-solid"
+																	placeholder="" name="building_no" />
+																<!--end::Input-->
 															</div>
 
-														</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Flat Number</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="flat_no" />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Floor</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="floor" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Area ( as per sale
+																	deed)</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="area" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Owner Name</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input id="ownername" type="text"
+																	class="owernername form-control form-control-solid"
+																	data-provide="typeahead" placeholder=""
+																	name="owner_name" />
+																<input hidden id="ownerid" type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="owner_id" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Owner Phone
+																	Number</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input id="ownerphone" type="text"
+																	class="ownerphone form-control form-control-solid"
+																	placeholder="" name="owner_phone" />
+
+																<input hidden id="ownertype" type="text"
+																	class="ownerphone form-control form-control-solid"
+																	placeholder="" name="owner_type" value="OWNER" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Purchase Date</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" name="purchase" id="datepicker">
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<div
+																	class="form-check form-switch form-check-custom form-check-solid">
+
+																	<label class="form-check-label m-4"
+																		for="flexSwitchChecked">
+																		Owner is occupant
+																	</label>
+																	<input class="form-check-input" type="checkbox"
+																		name="owneroccupant" id="flexSwitchChecked"
+																		checked />
+
+																</div>
+
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Document File</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+
+																<input type="file" name="file" autocomplete="off">
+
+
+															</div>
 														</div>
 														<!--end::Input group-->
 													</div>
@@ -319,18 +355,18 @@ License: For each use you must have a valid license purchased only from above li
 	<script>var hostUrl = "static/assets/";</script>
 	<!--begin::Javascript-->
 	<!--begin::Global Javascript Bundle(used by all pages)-->
- 
+
 	<!--end::Global Javascript Bundle-->
 	<!--begin::Page Vendors Javascript(used by this page)-->
 	<script src="static/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 	<!--end::Page Vendors Javascript-->
 	<!--begin::Page Custom Javascript(used by this page)-->
 	<script src="static/assets/js/newflat.js"></script>
-	<script type="text/javascript">  
-  
-		
-	  
-	</script>  
+	<script type="text/javascript">
+
+
+
+	</script>
 	<!--end::Page Custom Javascript-->
 	<!--end::Javascript-->
 </body>

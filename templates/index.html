@@ -163,19 +163,19 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Header-->
 											<div class="card-header border-0 pt-5 pb-3">
 												<!--begin::Card title-->
-												<h3 class="card-title fw-bolder text-gray-800 fs-2">Parijat Co-Op
-													Housing Society</h3>
+												<h3 class="card-title fw-bolder text-gray-800 fs-2">{{society.name}}</h3>
 												<!--end::Card title-->
 
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body py-0 fs-3">
-												<p class="">Dahanukar Colony , Lane No 5</p>
-												<p>Kothrud, Pune 411048</p>
+												<p class="">{{society.address1}}</p>
+												<p>{{society.address2}}</p>
+												<p>{{society.city}} {{society.pincode}}</p>
 												<p>Maharashtra</p>
-												<p>9873293323</p>
-												<p>parijatchs@gmail.com</p>
+												<p>Phone No: {{society.phone_no}}</p>
+												<p>Email: {{society.email}}</p>
 
 											</div>
 											<!--end::Body-->
@@ -197,10 +197,10 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Hidden-->
 														<div class="d-flex flex-column px-9 pt-5">
 															<!--begin::Number-->
-															<div class="text-success fw-boldest fs-2hx">244</div>
+															<div class="text-success fw-boldest fs-2hx">{{flat_count}}</div>
 															<!--end::Number-->
 															<!--begin::Description-->
-															<span class="text-gray-400 fw-bold fs-6">Total Units</span>
+															<span class="text-gray-400 fw-bold fs-6">Total Flats</span>
 															<!--end::Description-->
 														</div>
 														<!--end::Hidden-->
@@ -217,7 +217,7 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Hidden-->
 														<div class="d-flex flex-column px-9 pt-5">
 															<!--begin::Number-->
-															<div class="text-primary fw-boldest fs-2hx">200</div>
+															<div class="text-primary fw-boldest fs-2hx">{{veh_count}}</div>
 															<!--end::Number-->
 															<!--begin::Description-->
 															<span class="text-gray-400 fw-bold fs-6">Total
@@ -242,11 +242,11 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Hidden-->
 														<div class="d-flex flex-column px-9 pt-5">
 															<!--begin::Number-->
-															<span class="text-primary fw-boldest fs-2hx">145</span>
+															<span class="text-primary fw-boldest fs-2hx">{{visitor_count}}</span>
 															<!--end::Number-->
 															<!--begin::Description-->
 															<span class="text-gray-400 fw-bold fs-6">Visitors
-																Today</span>
+																</span>
 															<!--end::Description-->
 														</div>
 														<!--end::Hidden-->
