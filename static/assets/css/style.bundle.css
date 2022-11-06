@@ -40110,11 +40110,11 @@ code:not([class*=language-]) {
 }
 .form-check.form-check-solid .form-check-input {
   border: 0;
-  background-color: #EFF2F5;
+  background-color: #9A46B7;
 }
 .form-check.form-check-solid .form-check-input:active, .form-check.form-check-solid .form-check-input:focus {
   filter: none;
-  background-color: #EFF2F5;
+  background-color: #9A46B7;
 }
 .form-check.form-check-solid .form-check-input:checked {
   background-color: #009EF7;

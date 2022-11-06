@@ -32,8 +32,8 @@ CREATE TABLE society (
 #    CONSTRAINT society_pk PRIMARY KEY (type_ID)
 
 
-person_type_table = """
-CREATE TABLE person_type (
+occupant_type_table = """
+CREATE TABLE occupant_type (
     type_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     type VARCHAR(16)
 );
@@ -43,10 +43,7 @@ person_table = """
 CREATE TABLE person (
     person_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(256),
-    phone_number CHAR(10),
-    person_type INTEGER,
-    CONSTRAINT `person_fk1` FOREIGN KEY (person_type) REFERENCES person_type(type_ID)
-        ON UPDATE CASCADE ON DELETE CASCADE
+    phone_number CHAR(10)
 );
 """
 
@@ -87,12 +84,14 @@ CREATE TABLE visitor_entry (
     entry_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     visitor_ID INTEGER,
     flat_ID INTEGER,
+    visitee_ID INTEGER,
     entry_time VARCHAR(24),
     exit_time VARCHAR(24),
     vehicle_number VARCHAR(16),
     no_of_people INTEGER,
     CONSTRAINT `visitor_entry_fk1` FOREIGN KEY (visitor_ID) REFERENCES person(person_ID),
-    CONSTRAINT `visitor_entry_fk2` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID)
+    CONSTRAINT `visitor_entry_fk2` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
+    CONSTRAINT `visitor_entry_fk3` FOREIGN KEY (visitee_ID) REFERENCES person(person_ID)
 );
 """
 
@@ -106,25 +105,28 @@ CREATE TABLE visitor_entry (
 # """
 
 owner_history_table = """
-CREATE TABLE owner_history (
+CREATE TABLE flat_owner_history_table (
     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     flat_ID INTEGER NOT NULL,
-    owner_ID INTEGER NOT NULL,
+    person_ID INTEGER NOT NULL,
+    purchase_date VARCHAR(24),
+    sale_date VARCHAR(24),
     CONSTRAINT `owner_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
-    CONSTRAINT `owner_history_fk2` FOREIGN KEY (owner_ID) REFERENCES person(person_ID)
+    CONSTRAINT `owner_history_fk2` FOREIGN KEY (person_ID) REFERENCES person(person_ID)
 );
 """
 
 
-tenant_history_table = """
-CREATE TABLE owner_history (
+occupant_history_table = """
+CREATE TABLE flat_occupant_history_table (
     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     flat_ID INTEGER NOT NULL,
-    tenant_ID INTEGER NOT NULL,
+    person_ID INTEGER NOT NULL,
+    type INTEGER NOT NULL,
     from_date VARCHAR(24),
     end_date VARCHAR(24),
     CONSTRAINT `tenant_history_fk1` FOREIGN KEY (flat_ID) REFERENCES flat(flat_ID),
-    CONSTRAINT `tenant_history_fk2` FOREIGN KEY (tenant_ID) REFERENCES person(person_ID)
+    CONSTRAINT `tenant_history_fk2` FOREIGN KEY (person_ID) REFERENCES person(person_ID)
 );
 """
 
@@ -144,16 +146,16 @@ CREATE TABLE maintainance (
 
 
 conn_cursor.execute(society_table)
-conn_cursor.execute(person_type_table)
+conn_cursor.execute(occupant_type_table)
 conn_cursor.execute(person_table)
 conn_cursor.execute(vehicle_type_table)
 conn_cursor.execute(vehicle_table)
 conn_cursor.execute(visitor_entry_table)
 conn_cursor.execute(flat_table)
+conn_cursor.execute(owner_history_table)
+conn_cursor.execute(occupant_history_table)
 # conn_cursor.execute(occupant_table)
 conn_cursor.execute(maintainance)
 
 conn.commit()
-test = conn_cursor.execute("SELECT * FROM person_type;")
-print( test);
 conn.close()

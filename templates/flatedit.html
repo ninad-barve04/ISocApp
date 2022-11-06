@@ -41,8 +41,9 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Stylesheets Bundle-->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
 </head>
 <!--end::Head-->
@@ -164,23 +165,42 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Table Widget 1-->
 										{% if error|length > 0 %}
 										<div class="alert alert-danger" role="alert">
-											Error creating record :  {{ error }}
+											Error creating record : {{ error }}
 										</div>
 										{% endif %}
 										<div class="card">
 											<!--begin::Header-->
 											<div class="card-header border-0 pt-5 pb-3">
 												<!--begin::Card title-->
-												<h3 class="card-title fw-bolder text-gray-800 fs-2">New Unit/Flat </h3>
+												<h3 class="card-title fw-bolder text-gray-800 fs-2">Edit Flat Details
+												</h3>
 												<!--end::Card title-->
 
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body py-0 fs-3">
+												<div class="row gy-5 g-xl-8">
+													<!--begin::Col-->
+													<div class="col-xxl-12" style="float:left">
+														<form class="form m-4" style="float:left"
+															action="/newflatowner?flatid={{flat.flat_ID}}" method="GET">
+															<input hidden type="text" name="flatid"
+																value="{{flat.flat_ID}}"" / >
+																	<button class=" btn btn-primary" type="submit">Add New Owner Record</button>
+														</form>
+														<form class="form m-4" style="float:left"
+															action="/newflattenant?flatid={{flat.flat_ID}}"
+															method="GET">
+															<input hidden type="text" name="flatid"
+																value="{{flat.flat_ID}}"" / >
+																	<button class=" btn btn-primary" type="submit">Add New Tenant Record</button>
+														</form>
+													</div>
+												</div>
 
-												<form class="form" id="kt_modal_add_event_form" 
-												action="/newflat" method="POST">
+												<form class="form" id="kt_modal_add_event_form" action="/newflat"
+													method="POST">
 													<!--begin::Modal header-->
 													<div class="modal-header">
 
@@ -188,85 +208,82 @@ License: For each use you must have a valid license purchased only from above li
 													<!--end::Modal header-->
 													<!--begin::Modal body-->
 													<div class="modal-body py-10 px-lg-17">
-														<div class="row">
 														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">Building Number</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="text" class="visitorphone form-control form-control-solid"
-																placeholder="" name="building_no"  />
+															<input type="text"
+																class="visitorphone form-control form-control-solid"
+																placeholder="" value="{{flat.bldg_no}}"
+																name="building_no" />
 															<!--end::Input-->
 														</div>
 
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">Flat Number</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="flat_no"   />
+																placeholder="" value="{{flat.flat_no}}"
+																name="flat_no" />
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														
+
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">Floor</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="floor"  />
+																placeholder="" value="{{flat.floor_no}}" name="floor" />
 															<!--end::Input-->
 														</div>
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Area ( as per sale deed)</label>
+															<label class="fs-6 fw-bold mb-2">Area ( as per sale
+																deed)</label>
 															<!--end::Label-->
 															<!--begin::Input-->
 															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="area"   />
+																placeholder="" value="{{flat.area}}" name="area" />
 															<!--end::Input-->
 														</div>
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">Owner Name</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input id="ownername" type="text"  class="owernername form-control form-control-solid"
-															data-provide="typeahead" placeholder="" name="owner_name"  />
-															<input hidden id="ownerid" type="text"  class="form-control form-control-solid"
-																placeholder="" name="owner_id" />
+															<input id="ownername" type="text"
+																class=" form-control form-control-solid"
+																data-provide="typeahead" placeholder=""
+																value="{{flat.name}}" name="owner_name" />
+															<input hidden id="ownerid" type="text"
+																class="form-control form-control-solid" placeholder=""
+																value={{flat.owner_ID}} name="owner_id" />
 															<!--end::Input-->
 														</div>
-														<div class="fv-row mb-9 col-xxl-6">
+														<div class="fv-row mb-9">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">Owner Phone Number</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input id="ownerphone" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_phone"   />
+															<input id="ownerphone" type="text"
+																class="ownerphone form-control form-control-solid"
+																placeholder="" value="{{flat.phone_number}}"
+																name="owner_phone" />
 
-															<input hidden id="ownertype" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_type"  value="OWNER"/>
+															<input hidden id="ownertype" type="text"
+																class="ownerphone form-control form-control-solid"
+																placeholder="" name="owner_type" value="{{flat.type}}"
+																value="OWNER" />
 															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<div class="form-check form-switch form-check-custom form-check-solid">
-																 
-																<label class="form-check-label m-4" for="flexSwitchChecked">
-																	Owner is occupant
-																</label>
-																<input class="form-check-input" type="checkbox" name="owneroccupant" id="flexSwitchChecked"  checked  />
-																 
-															</div>
-
-														</div>
 														</div>
 														<!--end::Input group-->
 													</div>
@@ -319,18 +336,17 @@ License: For each use you must have a valid license purchased only from above li
 	<script>var hostUrl = "static/assets/";</script>
 	<!--begin::Javascript-->
 	<!--begin::Global Javascript Bundle(used by all pages)-->
- 
+
 	<!--end::Global Javascript Bundle-->
 	<!--begin::Page Vendors Javascript(used by this page)-->
 	<script src="static/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 	<!--end::Page Vendors Javascript-->
 	<!--begin::Page Custom Javascript(used by this page)-->
-	<script src="static/assets/js/newflat.js"></script>
-	<script type="text/javascript">  
-  
-		
-	  
-	</script>  
+	<script type="text/javascript">
+
+
+
+	</script>
 	<!--end::Page Custom Javascript-->
 	<!--end::Javascript-->
 </body>

@@ -41,8 +41,9 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Stylesheets Bundle-->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
 </head>
 <!--end::Head-->
@@ -162,16 +163,11 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::Col-->
 									<div class="col-xxl-12">
 										<!--begin::Table Widget 1-->
-										{% if error|length > 0 %}
-										<div class="alert alert-danger" role="alert">
-											Error creating record :  {{ error }}
-										</div>
-										{% endif %}
-										<div class="card">
+										<div class="card card-xxl-stretch">
 											<!--begin::Header-->
 											<div class="card-header border-0 pt-5 pb-3">
 												<!--begin::Card title-->
-												<h3 class="card-title fw-bolder text-gray-800 fs-2">New Unit/Flat </h3>
+												<h3 class="card-title fw-bolder text-gray-800 fs-2">New Vehicle </h3>
 												<!--end::Card title-->
 
 											</div>
@@ -179,8 +175,8 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Body-->
 											<div class="card-body py-0 fs-3">
 
-												<form class="form" id="kt_modal_add_event_form" 
-												action="/newflat" method="POST">
+												<form class="form" id="kt_modal_add_event_form" action="/newvehicle"
+													method="POST">
 													<!--begin::Modal header-->
 													<div class="modal-header">
 
@@ -188,105 +184,94 @@ License: For each use you must have a valid license purchased only from above li
 													<!--end::Modal header-->
 													<!--begin::Modal body-->
 													<div class="modal-body py-10 px-lg-17">
+														<!--begin::Input group-->
 														<div class="row">
-														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Building Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="visitorphone form-control form-control-solid"
-																placeholder="" name="building_no"  />
-															<!--end::Input-->
-														</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Vehicle Number</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="vehicle_number" />
 
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Flat Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="flat_no"   />
-															<!--end::Input-->
-														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														
-														<!--end::Input group-->
-														<!--begin::Input group-->
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Floor</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="floor"  />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Area ( as per sale deed)</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input type="text" class="form-control form-control-solid"
-																placeholder="" name="area"   />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Owner Name</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input id="ownername" type="text"  class="owernername form-control form-control-solid"
-															data-provide="typeahead" placeholder="" name="owner_name"  />
-															<input hidden id="ownerid" type="text"  class="form-control form-control-solid"
-																placeholder="" name="owner_id" />
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<label class="fs-6 fw-bold mb-2">Owner Phone Number</label>
-															<!--end::Label-->
-															<!--begin::Input-->
-															<input id="ownerphone" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_phone"   />
-
-															<input hidden id="ownertype" type="text"  class="ownerphone form-control form-control-solid"
-																placeholder="" name="owner_type"  value="OWNER"/>
-															<!--end::Input-->
-														</div>
-														<div class="fv-row mb-9 col-xxl-6">
-															<!--begin::Label-->
-															<div class="form-check form-switch form-check-custom form-check-solid">
-																 
-																<label class="form-check-label m-4" for="flexSwitchChecked">
-																	Owner is occupant
-																</label>
-																<input class="form-check-input" type="checkbox" name="owneroccupant" id="flexSwitchChecked"  checked  />
-																 
+																<!--end::Input-->
 															</div>
 
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Make</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="make" />
+																<!--end::Input-->
+															</div>
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Model</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="model" />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-9 col-xxl-6">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Vehicle Type</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text"
+																	class="form-control form-control-solid"
+																	placeholder="" name="type" />
+																<!--end::Input-->
+															</div>
 														</div>
+														<div class="row">
+															<div class="fv-row mb-9">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold mb-2">Owner Name</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input id="owner_name" type="text"
+																	class="owner form-control form-control-solid"
+																	placeholder="" name="owner_name" />
+
+																<input hidden id="owner_ID" type="text"
+																	class=" form-control form-control-solid"
+																	placeholder="" name="owner_ID" />
+
+
+															</div>
+
+
+
+															<!--end::Input group-->
 														</div>
-														<!--end::Input group-->
-													</div>
-													<!--end::Modal body-->
-													<!--begin::Modal footer-->
-													<div class="modal-footer flex-center">
-														<!--begin::Button-->
-														<a href="/flats" class="btn btn-light me-3">Cancel </a>
-														<!--end::Button-->
-														<!--begin::Button-->
-														<button type="submit" id="kt_modal_add_event_submit"
-															class="btn btn-primary">
-															<span class="indicator-label">Submit</span>
-															<span class="indicator-progress">Please wait...
-																<span
-																	class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>
-														<!--end::Button-->
-													</div>
-													<!--end::Modal footer-->
+														<!--end::Modal body-->
+														<!--begin::Modal footer-->
+														<div class="modal-footer flex-center">
+															<!--begin::Button-->
+															<a href="/vehicles" class="btn btn-light me-3">Cancel </a>
+															<!--end::Button-->
+															<!--begin::Button-->
+															<button type="submit" id="kt_modal_add_event_submit"
+																class="btn btn-primary">
+																<span class="indicator-label">Submit</span>
+																<span class="indicator-progress">Please wait...
+																	<span
+																		class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+															</button>
+															<!--end::Button-->
+														</div>
+														<!--end::Modal footer-->
 												</form>
 											</div>
 											<!--end::Body-->
@@ -319,18 +304,18 @@ License: For each use you must have a valid license purchased only from above li
 	<script>var hostUrl = "static/assets/";</script>
 	<!--begin::Javascript-->
 	<!--begin::Global Javascript Bundle(used by all pages)-->
- 
+
 	<!--end::Global Javascript Bundle-->
 	<!--begin::Page Vendors Javascript(used by this page)-->
 	<script src="static/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 	<!--end::Page Vendors Javascript-->
 	<!--begin::Page Custom Javascript(used by this page)-->
-	<script src="static/assets/js/newflat.js"></script>
-	<script type="text/javascript">  
-  
-		
-	  
-	</script>  
+	<script src="static/assets/js/newvehicle.js"></script>
+	<script type="text/javascript">
+
+
+
+	</script>
 	<!--end::Page Custom Javascript-->
 	<!--end::Javascript-->
 </body>

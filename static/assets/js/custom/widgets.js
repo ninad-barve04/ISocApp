@@ -349,7 +349,7 @@ var KTWidgets = function() {
 		var options = {
 			series: [{
 				name: 'Visitors',
-				data: [123,156,143,156,190]
+				data: [123,156,143,156]
 			}],
 			chart: {
                 fontFamily: 'inherit',
@@ -390,7 +390,7 @@ var KTWidgets = function() {
                 labels: {
 					show: false,
                 },
-				categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+				categories: ["1", "2", "3", "4"],
 				position: 'top',
 				axisBorder: {
 					show: false
@@ -414,7 +414,7 @@ var KTWidgets = function() {
 				labels: {
 					show: false,
 					formatter: function(val) {
-						return val + "%";
+						return val ;
 					}
 				}
 

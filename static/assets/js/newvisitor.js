@@ -25,5 +25,22 @@ $('input.vph').typeahead({
             console.log(data);   
             return process(data);  
         });  
-    }  
+    }  ,
+    displayText: function(item){
+        if( item.selected){
+            return `${item.phone_number} `;
+        }
+        return `${item.name}-${item.phone_number} `;
+    },
+    updater: function(selection){
+        console.log("You selected: " + selection)
+        $("#vph").val(selection.phone_number);
+        $('#person_name').val(selection.name);
+        $('#visitor_id').val(selection.person_ID);
+
+        selection['selected'] = true;
+        // fetch the flat owned by 
+
+        return selection;
+    }
 });

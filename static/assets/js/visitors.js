@@ -1,12 +1,7 @@
  
 $(document).ready(function () {
-    $('#visitors').DataTable();
+    $('#visitors').DataTable({
+        order: [[0, 'desc']],
+    });
 });
  
-
-
-$('input.typeahead').typeahead({  
-  source:  function (query, process) {  
-   console.log( query);
-  }  
-});  

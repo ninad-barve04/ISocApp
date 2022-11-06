@@ -99,7 +99,7 @@ License: For each use you must have a valid license purchased only from above li
 											class="menu-item menu-lg-down-accordion me-lg-1">
 											<a href="/flats">
 												<span class="menu-link py-3">
-													<span class="menu-title">Units/Flats</span>
+													<span class="menu-title">Flats</span>
 													<span class="menu-arrow d-lg-none"></span>
 												</span>
 											</a>
@@ -169,15 +169,17 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Body-->
 											<div class="card-body py-0 fs-3">
 												<div class="table-responsive">
-													<table id="flats"  class="table align-middle table-row-bordered table-row-dashed gy-5" id="kt_table_widget_1">
+													<table id="flats"
+														class="table align-middle table-row-bordered table-row-dashed gy-5"
+														id="kt_table_widget_1">
 														<!--begin::Table body-->
 														<thead>
 															<tr class="text-start text-white-400 fw-boldest fs-7 text-uppercase">
 																<th class="min-w-50px px-0">Building</th>
 																<th class="min-w-50px">Flat #</th>
 																<th class="pe-2 min-w-50px">Floor</th>
-																<th class="pe-2 min-w-50px">Occupant</th>
-																<th class="pe-2 min-w-250px">Name</th>
+																<th class="pe-2 min-w-220px">Owner Name</th>
+																<th class="pe-2 min-w-50px">Phone No</th>
 																<th class="pe-2 min-w-25px">Action</th>
 															</tr>
 														</thead>
@@ -188,13 +190,21 @@ License: For each use you must have a valid license purchased only from above li
 																<td>{{flat.bldg_no}}</a></td>
 																<td>{{flat.flat_no}}</td>
 																<td>{{flat.floor_no}}</td>
-																<td>{{flat.type}}</td>
 																<td>{{flat.name}}</td>
 																<td>{{flat.phone_number}}</td>
-																<td>edit</td>
+																<td>
+																	<form class="form" action="/flatdetails"
+																		method="GET">
+																		<input hidden type="text" name="flatid"
+																			value="{{flat.flat_ID}}"" / >
+																		<button class=" btn btn-primary" type="submit">Details</button>
+																	</form>
+																	 
+																</td>
+																</td>
 															</tr>
 															{% endfor %}
-															
+
 															<!--end::Table row-->
 														</tbody>
 													</table>

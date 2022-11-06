@@ -84,7 +84,7 @@ License: For each use you must have a valid license purchased only from above li
 											class="menu-item menu-lg-down-accordion me-lg-1">
 											<a href="/flats">
 											<span class="menu-link py-3">
-												<span class="menu-title">Units/Flats</span>
+												<span class="menu-title">Flats</span>
 												<span class="menu-arrow d-lg-none"></span>
 											</span>
 										</a>
@@ -164,21 +164,26 @@ License: For each use you must have a valid license purchased only from above li
 																<th class="min-w-50px px-0">Make/Model</th>
 																<th class="min-w-50px px-0">Type</th>
 																<th class="min-w-50px">Owner Name</th>
+																<th class="min-w-50px">Owner Phone</th>
 																<th class="pe-2 min-w-50px">Owner Flat No</th>
+																<!-- <th class="pe-2 min-w-20px">Action</th> -->
 																 
 															</tr>
 														</thead>
 														<tbody>
 															<!--begin::Table row-->
-															
+															{% for vehicle in vehicles %}
 															<tr>
-																<td>OD-12-AA-2121</td>
-																<td>Maruti-Baleno</td>
-																<td>4-Wheeler</td>
-																<td>Sandip Bhandari</td>
-																<td>A1-102</td>
-																 
+																<!-- <td>{{vehicle}}</a></td> -->
+																<td>{{vehicle.vehicle_ID}}</td>
+																<td>{{vehicle.make}} - {{vehicle.model}}</td>
+																<td>{{vehicle.type}}</td>
+																<td>{{vehicle.name}}</td>
+																<td>{{vehicle.phone_number}}</td>
+																<td>{{vehicle.bldg_no}}-{{vehicle.flat_no}}</td>
+																<!-- <td>edit</td> -->
 															</tr>
+															{% endfor %}
 															<!--end::Table row-->
 														</tbody>
 													</table>	 
@@ -191,7 +196,11 @@ License: For each use you must have a valid license purchased only from above li
 										 
 									</div>
 									<!--end::Row-->
-						 
+									<div class="row gy-5 g-xl-8">
+										<div class="col-xxl-2">
+											<a href="/newvehicle" class="btn btn-primary my-2"> New Vehicle</a>
+										</div>
+									</div>
 									 
 								</div>
 								<!--end::Card body-->
