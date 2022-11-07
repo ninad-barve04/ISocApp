@@ -125,7 +125,7 @@ CREATE TABLE flat_owner_history_table (
 owner_file_record_table = """
 CREATE TABLE flat_owner_file_record_table (
     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    history_ID INTEGER NOT NULL,
+    history_ID INTEGER,
     filepath VARCHAR(128),
     CONSTRAINT owner_file_fk1 FOREIGN KEY (history_ID) REFERENCES flat_owner_history_table(ID)
 );
