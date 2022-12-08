@@ -156,6 +156,7 @@ def createnewvisitor():
     cursor = conn.cursor()
     error = ''
     try:
+        print([visitor_id, visting_flat_id, visitee_id, entry, visitor_vehicle , visting_count])
         newvisitor = cursor.execute("""
                                         INSERT INTO visitor_entry 
                                             (visitor_ID, flat_ID,visitee_ID, entry_time,vehicle_number,no_of_people) 

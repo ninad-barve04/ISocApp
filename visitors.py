@@ -24,9 +24,9 @@ def getVisitors( qry):
             JOIN person po ON v.visitee_ID=po.person_ID """
 
     if( qry == '1'):
-        query = query+' WHERE exit_time IS NULL'
-
+        query = query + " WHERE exit_time IS NULL"
+    query = query + ";"
     visitors = conn.execute(query).fetchall()
     conn.close()
-
+    print("Visitors query:\n", visitors)
     return visitors
